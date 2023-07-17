@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import Editor from "@monaco-editor/react";
 import Navbar from './Components/Navbar';
-import Axios from 'axios';
+import axios from 'axios';
 import spinner from './spinner.svg';
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
 			return
 		}
 
-		Axios.post(`http://localhost:8000/compile`, {
+		axios.post(`http://localhost:5000/compile`, {
 			code: userCode,
 			language: userLang,
 			input: userInput
