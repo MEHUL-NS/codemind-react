@@ -153,7 +153,7 @@ h4 {
 }
 
 .run-btn:active {
-	background-color: #6e9427;
+	background-color: #106683;
 }
 
 
@@ -164,10 +164,12 @@ h4 {
 	height: 50px;
 	text-align: center;
 	color: #afec3f;
-	background-color: #474747;
+	background-color: #242424;
 	gap: 20px;
 }
-
+.forSelection{
+	gap:40px
+}
 #no {
 	height: 36px;
 	width: 80px;
