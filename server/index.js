@@ -3,18 +3,10 @@ import cors from 'cors'
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import router from './Routes/routes.js'
-
-let port = 5000
-
 import fs from 'fs'
-let data = "This is a file containing a collection of books.";
-fs.writeFile("./codeFiles/test.txt" , data , (err) => {
-    if(err){
-        console.log("Error saving the file : ",err)
-        return;
-    }
-    console.log("File saved successfully")
-})    
+import path from 'path';
+import {exec} from 'child_process'
+let port = 5000
 
 const app = express();
 app.use(cors())
@@ -26,6 +18,55 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/' , router)
+
+
+app.post("/compile" , (req,res) => {
+    const code = req.body.code;   
+    const lang = req.body.lang
+
+    let fileName = 'currentCode.cpp'
+    let filePath = `./codeFiles/${fileName}`
+   
+    fs.writeFile(filePath, code, (err) => {
+      if (err) {
+        console.error('Error saving file:', err);       
+        return;
+      }
+
+      console.log('File saved successfully.');
+      
+      const compileCommand = `g++ -o compiledCode.exe ${filePath}`;
+
+    
+      exec(compileCommand, (error, stdout, stderr) => {
+        if (error) {
+          console.error('Compilation error:', error);
+          
+      return;
+    }
+
+    console.log('Compilation successful.');
+           
+    // let executionCommand = './compiledCode.exe'
+    const executionCommand = path.join('./', 'compiledCode.exe');
+
+
+    exec(executionCommand, (error, stdout, stderr) => {
+      if (error) {
+        console.error('Execution error:', error);
+      
+        return;
+      }
+
+      console.log('Execution successful.');
+      console.log('Program output:', stdout);
+      console.log('Program error:', stderr);
+      
+      
+    });
+  });
+})
+})
 
 app.get("/health", (req,res)=>{
     res.json("Server is running");
