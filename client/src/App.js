@@ -30,6 +30,7 @@ function App() {
 			language: userLang,
 			input: userInput
 		}).then((res) => {
+			console.log(res)
 			setUserOutput(res.data.output);
 		}).then(() => {
 			setLoading(false);

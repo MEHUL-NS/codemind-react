@@ -61,7 +61,11 @@ app.post("/compile", (req, res) => {
                     console.log('Execution successful.');
                     console.log('Program output:', stdout);
                     console.log('Program error:', stderr);
-
+                    let d = {
+                        output : stdout,
+                        error : stderr
+                    }
+                    res.send(d)
                 });
             });
         })
@@ -78,7 +82,6 @@ app.post("/compile", (req, res) => {
 
             console.log('File saved successfully.');
 
-
             const executionCommand = `python ${filePath}`;
 
             exec(executionCommand, (error, stdout, stderr) => {
@@ -89,7 +92,11 @@ app.post("/compile", (req, res) => {
                 console.log('Execution successful.');
                 console.log('Program output:', stdout);
                 console.log('Program error:', stderr);
-
+                let d = {
+                    output : stdout,
+                    error : stderr
+                }
+                res.send(d)
             })
         })
     }
@@ -128,7 +135,11 @@ app.post("/compile", (req, res) => {
                     console.log('Execution successful.');
                     console.log('Program output:', stdout);
                     console.log('Program error:', stderr);
-
+                    let d = {
+                        output : stdout,
+                        error : stderr
+                    }
+                    res.send(d)
                 });
             });
         });
