@@ -12,15 +12,13 @@ router.post('/compile' , (req,res)=>{
     let input = req.body.input;
 
     const receivedCode = req.body.code
-    const fileName = 'filename.cpp';
-    const dirPath = 'C:/Users/sutra/OneDrive/Desktop/codeRmind/codeFiles'
-    const filePath = path.join(dirPath , fileName)
-    fs.writeFile(filePath , "hello" , (err) => {
+   
+    fs.writeFile("currentCode.txt" , receivedCode , (err) => {
         if(err){
             console.log("Error saving the file : ",err)
             return;
         }
-        console.log("File saved successfully")
+        console.log("Coding File saved successfully")
     })    
 })
 
