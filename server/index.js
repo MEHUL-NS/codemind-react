@@ -66,7 +66,33 @@ app.post("/compile", (req, res) => {
             });
         })
     }
-    
+    else if (lang === 'python') {
+        const fileName = 'code.py';
+        const filePath = `./codeFiles/${fileName}`;
+
+        fs.writeFile(filePath, code, (err) => {
+            if (err) {
+                console.error('Error saving file:', err);
+                return;
+            }
+
+            console.log('File saved successfully.');
+
+
+            const executionCommand = `python ${filePath}`;
+
+            exec(executionCommand, (error, stdout, stderr) => {
+                if (error) {
+                    console.error('Execution error:', error);
+                    return;
+                }
+                console.log('Execution successful.');
+                console.log('Program output:', stdout);
+                console.log('Program error:', stderr);
+
+            })
+        })
+    }
     else if (lang === 'c') {
         const fileName = 'code.c';
         const filePath = `./codeFiles/${fileName}`;
