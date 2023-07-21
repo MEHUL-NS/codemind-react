@@ -4,6 +4,8 @@ import Editor from "@monaco-editor/react";
 import Navbar from './Components/Navbar';
 import axios from 'axios';
 import spinner from './spinner.svg';
+import Problem from './Components/Problem';
+import { answers } from './data';
 
 function App() {
 
@@ -40,6 +42,13 @@ function App() {
 	function clearOutput() {
 		setUserOutput("");
 	}
+	function checkAnswer(){				
+		if (userOutput && answers && userOutput.trim() === answers[1].trim()) {
+			console.log("Correct");
+		  } else {
+			console.log("Wrong");
+		  }		  
+	}
 
 	return (
 		<div className="App">
@@ -64,12 +73,9 @@ function App() {
 						Run
 					</button>
 				</div>
-				<div className="right-container">
-					<h4>Input:</h4>
+				<div className="right-container">					
 					<div className="input-box">
-						<textarea id="code-inp" onChange=
-							{(e) => setUserInput(e.target.value)}>
-						</textarea>
+						<Problem />					
 					</div>
 					<h4>Output:</h4>
 					{loading ? (
@@ -79,6 +85,7 @@ function App() {
 					) : (
 						<div className="output-box">
 							<pre>{userOutput}</pre>
+							<button className="btn btn-secondary" onClick={()=>{checkAnswer()}}>Check Answer</button>
 							<button onClick={() => { clearOutput() }}
 								className="clear-btn">
 								Clear

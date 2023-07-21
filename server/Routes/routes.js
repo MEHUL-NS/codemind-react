@@ -1,11 +1,14 @@
 import express from "express";
-import fs from 'fs'
-import path from 'path'
-import { exec } from "child_process";
-// import { displayProblem } from "../Controllers/userController.js";
+import { displayProblem } from "../Controllers/userControllers.js";
 
 
 const router = express.Router()
+
+
+
+router.get('/displayProblem' , displayProblem)
+
+
 
 // router.post('/compile' , (req,res)=>{
 //     const code = req.body.code;   
@@ -55,7 +58,7 @@ const router = express.Router()
 
 
 
-// router.get('/displayProblem' , displayProblem)
+
 
 
 export default router;
