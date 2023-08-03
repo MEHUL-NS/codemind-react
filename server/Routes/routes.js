@@ -1,5 +1,5 @@
 import express from "express";
-import { displayProblem } from "../Controllers/userControllers.js";
+import { displayProblem, fetchAndPrintProblems} from "../Controllers/userControllers.js";
 
 
 const router = express.Router()
@@ -7,7 +7,7 @@ const router = express.Router()
 
 
 router.get('/displayProblem' , displayProblem)
-
+router.get('/fetchProblems' ,  fetchAndPrintProblems)
 
 
 // router.post('/compile' , (req,res)=>{
